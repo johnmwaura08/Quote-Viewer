@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
+
 
 import './App.css';
 
-import React, { Component } from 'react';
 
 //TASKS
 // 1.get Api URL
@@ -17,11 +17,31 @@ const API='https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6
  class App extends Component {
    state={
      quotes: [],
-     index: 0;
+     index: 0
+   }
+
+   componentDidMount(){
+     //we call the API here and update the state
+
+     fetch(API).then(res => res.json())
+                .then(res =>{
+
+                  this.setState({
+                    quotes: res.quotes
+                  }, this.getRandomIndex)
+                })
+   }
+
+   getRandomIndex=()=> {
+
+   }
+   getNewColor=() => {
+
    }
   render() {
     return (
       <div>
+        <p>hey</p>
         
       </div>
     )
