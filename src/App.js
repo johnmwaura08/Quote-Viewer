@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 
 import './App.css';
+import Button from '@material-ui/core/Button';
 
 
 //TASKS
@@ -34,18 +35,69 @@ const API='https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6
 
    getRandomIndex=()=> {
 
+    const {quotes} = this.state;
+    
+    if(quotes.length> 0) {
+      const index = Math.floor(Math.random() * quotes.length);
+          this.setState({
+            index
+          })
+    }
+
    }
    getNewColor=() => {
 
    }
   render() {
+
+    const {quotes, index} = this.state;
+    
+    const quote = quotes[index];
+    
+     
+    const tweetURL= `https://twitter.com/intent/tweet? text=$`;
+     
+
     return (
-      <div>
-        <p>hey</p>
-        
-      </div>
+     <div className="container">
+        <div className="wrapper d-flex align-items-center justify-content-center color ">
+       <div className="col-6 box p-5 rounded" id="quote-box">
+           <div >
+            
+            {
+                quote && (
+              
+                <div className="mb-4 color " >
+                  <p id="text">{quote.quote}</p>
+                   <cite className="d-block text-right" id="author"> -{quote.author}</cite>
+                  </div>
+              
+              )       
+              
+            }
+            <div  className="d-flex justify-content-between">
+
+
+              <a className="btn btn-sm btn-info" href={tweetURL}
+                target="_blank" id="tweet-quote"><i className=" fab fa-twitter"></i> Tweet</a>
+              <button className="btn btn-sm btn-info " onClick={this.getRandomIndex } id="new-quote ">More Quotes</button>
+            </div>
+          </div>
+
+
+         </div> 
+            
+    
+       </div>  
+
+     </div>
+  
+    
+
+
     )
   }
 }
+//need to add fontawesome and change background color dynamically
 
 export default App;
